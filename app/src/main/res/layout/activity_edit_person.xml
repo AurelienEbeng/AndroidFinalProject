@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditPerson">
+
+    <TextView
+        android:id="@+id/tvPersonTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit Person"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvEditPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Text_Style"
+        android:text="Person Name : "
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvPersonTitle" />
+
+    <TextView
+        android:id="@+id/tvEditPersonAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Age : "
+        style="@style/Text_Style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditPersonName"/>
+
+    <TextView
+        android:id="@+id/tvEditPersonWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weight : "
+        style="@style/Text_Style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditPersonAge" />
+
+    <TextView
+        android:id="@+id/tvEditPersonHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Height : "
+        style="@style/Text_Style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvEditPersonWeight" />
+
+    <TextView
+        android:id="@+id/tvEditPersonAgeLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="years old"
+        style="@style/Text_Style"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toEndOf="@+id/etEditPersonAge"
+        app:layout_constraintTop_toTopOf="@+id/etEditPersonAge"/>
+
+    <TextView
+        android:id="@+id/tvEditPersonWeightLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Kg"
+        style="@style/Text_Style"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toEndOf="@+id/etEditPersonWeight"
+        app:layout_constraintTop_toTopOf="@+id/etEditPersonWeight"/>
+
+    <TextView
+        android:id="@+id/tvEditPersonHeightLbl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="cm"
+        style="@style/Text_Style"
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toEndOf="@+id/etEditPersonHeight"
+        app:layout_constraintTop_toTopOf="@+id/etEditPersonHeight"/>
+
+    <EditText
+        android:id="@+id/etEditPersonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_edit_person_name"
+        style="@style/EditText_Style"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@+id/tvEditPersonName"
+        app:layout_constraintTop_toTopOf="@+id/tvEditPersonName" />
+
+    <EditText
+        android:id="@+id/etEditPersonAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_edit_person_age"
+        style="@style/EditText_Style"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@+id/tvEditPersonAge"
+        app:layout_constraintTop_toTopOf="@+id/tvEditPersonAge" />
+
+    <EditText
+        android:id="@+id/etEditPersonWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_edit_person_weight"
+        style="@style/EditText_Style"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/tvEditPersonWeight"
+        app:layout_constraintTop_toTopOf="@+id/tvEditPersonWeight" />
+
+    <EditText
+        android:id="@+id/etEditPersonHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/et_edit_person_height"
+        style="@style/EditText_Style"
+        android:inputType="numberDecimal"
+        app:layout_constraintStart_toEndOf="@+id/tvEditPersonHeight"
+        app:layout_constraintTop_toTopOf="@+id/tvEditPersonHeight"/>
+
+    <Button
+        android:id="@+id/btnEditPersonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginBottom="10dp"
+        style="@style/Button_Style"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <Button
+        android:id="@+id/btnEditPersonReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return"
+        style="@style/Button_Style"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
