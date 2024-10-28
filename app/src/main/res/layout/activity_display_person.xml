@@ -87,7 +87,7 @@
         app:layout_constraintTop_toTopOf="@+id/tvDisplayPersonHeightData"/>
 
     <TextView
-        android:id="@+id/tvDisplayEditPersonNameData"
+        android:id="@+id/tvDisplayPersonNameData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Person"

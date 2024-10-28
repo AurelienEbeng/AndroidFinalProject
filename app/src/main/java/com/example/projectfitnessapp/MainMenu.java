@@ -1,7 +1,9 @@
 package com.example.projectfitnessapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,18 +17,20 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 
 import model.User;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
+    private int userId;
+
     Button btnProfile, btnBMI, btnHistory, btnLogout;
     DatabaseReference personDatabase;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +42,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-//        initialize();
+        initialize();
     }
 
     private void initialize(){
@@ -53,6 +57,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         btnLogout.setOnClickListener(this);
 
         personDatabase = FirebaseDatabase.getInstance().getReference("Person");
+
+        // Keep the user Id throughout the app
+        sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        userId = sharedPreferences.getInt("userId",-1);
     }
 
     @Override
@@ -72,9 +80,21 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     }
 
     private void goToProfile(View view) {
+        Intent intent = new Intent(MainMenu.this, DisplayPerson.class);
+        startActivity(intent);
+        finish();
     }
 
     private void logout() {
+        SharedPreferences sharedPreferences = getSharedPreferences("MyAppsPrefs", MODE_PRIVATE);
 
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+
+        Intent intent = new Intent(MainMenu.this, LoginActivity.class);
+        Toast.makeText(this, "User Logout" , Toast.LENGTH_SHORT).show();
+        startActivity(intent);
+        finish();
     }
 }
