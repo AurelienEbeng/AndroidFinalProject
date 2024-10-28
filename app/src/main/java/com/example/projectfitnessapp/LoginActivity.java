@@ -10,38 +10,33 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.EventListener;
-
 import model.User;
 
-public class LogInActivity extends AppCompatActivity implements View.OnClickListener,
-        ValueEventListener, ChildEventListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tvCreateAccount, tvForgotPassword;
     EditText etUserId, etPassword;
     Button btnLogin;
 
-    DatabaseReference PersonDatabase, UserDatabase;
+    DatabaseReference  UserDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_edit_login);
+        setContentView(R.layout.activity_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -52,10 +47,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     private void initialize() {
         tvCreateAccount = findViewById(R.id.tvCreateAccount);
-        tvForgotPassword = findViewById(R.id.tvCreateAccount);
+        tvForgotPassword = findViewById(R.id.tvForgotPassword);
 
-        etUserId = findViewById(R.id.etUserId);
-        etPassword = findViewById(R.id.etPassword);
+        etUserId = findViewById(R.id.etUserIdLogin);
+        etPassword = findViewById(R.id.etPasswordLogin);
 
         btnLogin = findViewById(R.id.btnLogIn);
 
@@ -63,7 +58,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         tvForgotPassword.setOnClickListener(this);
         tvCreateAccount.setOnClickListener(this);
 
-        PersonDatabase = FirebaseDatabase.getInstance().getReference("Person");
+        UserDatabase = FirebaseDatabase.getInstance().getReference("User");
     }
 
     @Override
@@ -76,9 +71,13 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void goToForgotPage(View view) {
+        Intent intent = new Intent(LoginActivity.this, ForgotPassword.class);
+        startActivity(intent);
     }
 
     private void goToCreatePage(View view) {
+        Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+        startActivity(intent);
     }
 
     private void login(View view) {
@@ -86,7 +85,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             int userId = Integer.parseInt(etUserId.getText().toString());
             String password = etPassword.getText().toString();
 
-            DatabaseReference userRef = PersonDatabase.child(String.valueOf(userId));
+
+
+
+            DatabaseReference userRef = UserDatabase.child(String.valueOf(userId));
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -95,59 +97,30 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
                         if (storedPassword != null && storedPassword.equals(password)) {
                             User user = new User(userId, password);
-
-                            Intent intent = new Intent(LogInActivity.this, MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                             intent.putExtra("person",userId);
                             startActivity(intent);
                             finish();
                         } else {
-                            Toast.makeText(LogInActivity.this, "Error. Password Invalid",Toast.LENGTH_LONG).show();
+                            Snackbar.make(view, "Error. Password Invalid",
+                                    Snackbar.LENGTH_LONG).show();
                         }
                     } else {
-                        Toast.makeText(LogInActivity.this,
-                                "Error. User Id not found.", Toast.LENGTH_LONG).show();
+                        Snackbar.make(view,
+                                "Error. User Id not found.", Snackbar.LENGTH_LONG).show();
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Snackbar.make(view, "Database Error: "+error.getMessage(), Snackbar.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, "Database Error: "+error.getMessage(),
+                            Toast.LENGTH_LONG).show();
                 }
             });
         } catch (NumberFormatException e)  {
-            Snackbar.make(view, "Invalid User ID",Snackbar.LENGTH_LONG).show();
+            Toast.makeText(this, "Invalid User ID",Toast.LENGTH_LONG).show();
         } catch (Exception e) {
-            Snackbar.make(view,e.getMessage(),Snackbar.LENGTH_LONG).show();
+            Toast.makeText(this,e.getMessage(),Toast.LENGTH_LONG).show();
         }
-    }
-
-    @Override
-    public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-    }
-
-    @Override
-    public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-    }
-
-    @Override
-    public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-
-    }
-
-    @Override
-    public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-    }
-
-    @Override
-    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-    }
-
-    @Override
-    public void onCancelled(@NonNull DatabaseError error) {
-
     }
 }

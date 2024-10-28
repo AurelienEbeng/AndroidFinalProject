@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "553223296631",
     "project_id": "projectfitnessandroidapp",
-    "storage_bucket": "projectfitnessandroidapp.appspot.com"
+    "storage_bucket": "https://projectfitnessandroidapp-default-rtdb.firebaseio.com/"
   },
   "client": [
     {
