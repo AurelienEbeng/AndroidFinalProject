@@ -1,5 +1,6 @@
 package model;
 
+
 public class User {
     public int userId;
     public int personId;
@@ -9,6 +10,12 @@ public class User {
         this.userId = userId;
         personId = userId;
         this.password = password;
+    }
+
+    public User(String password) {
+        this.password = password;
+        userId += 100;
+        this.personId = userId;
     }
 
     public String getPassword() {

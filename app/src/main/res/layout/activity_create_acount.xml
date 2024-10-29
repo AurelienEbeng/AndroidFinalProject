@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/createAccount"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".CreateAccountActivity">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -30,16 +31,24 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
-        android:id="@+id/tvUsername"
+        android:id="@+id/tvCreateAccountUserId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username : "
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="10dp"
+        android:text="User Id : "
+        style="@style/Text_Style"
+        android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvCreateAccountTitle"/>
+
+    <TextView
+        android:id="@+id/tvCreateAccountUserIdData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UserId"
+        android:layout_marginTop="0dp"
+        style="@style/Text_Style"
+        app:layout_constraintStart_toEndOf="@+id/tvCreateAccountUserId"
+        app:layout_constraintTop_toTopOf="@+id/tvCreateAccountUserId"/>
 
     <TextView
         android:id="@+id/tvPassword"
@@ -51,7 +60,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/tvCreateAccountUserId" />
 
     <TextView
         android:id="@+id/tvConfirmPassword"
@@ -112,19 +121,6 @@
         android:layout_marginTop="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvHeight" />
-
-    <EditText
-        android:id="@+id/etUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Username"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:textSize="20sp"
-        android:background="@null"
-        android:layout_marginStart="10dp"
-        app:layout_constraintStart_toEndOf="@+id/tvUsername"
-        app:layout_constraintTop_toTopOf="@+id/tvUsername"/>
 
     <EditText
         android:id="@+id/etPassword"
@@ -217,4 +213,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvWeight" />
+
+    <Button
+        android:id="@+id/btnCreateAccountReturn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Return"
+        style="@style/Button_Style"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCreateAccount"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

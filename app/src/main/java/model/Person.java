@@ -13,10 +13,10 @@ public class Person {
     public int bmi;
     //public ArrayList<>
 
-    public Person(int personId, int userId, String name, int age, float weight, float height,
+    public Person(int personId, String name, int age, float weight, float height,
                   int bmi){
         this.personId = personId;
-        this.userId = userId;
+        this.userId = personId;
         this.name = name;
         this.age = age;
         this.weight = weight;
