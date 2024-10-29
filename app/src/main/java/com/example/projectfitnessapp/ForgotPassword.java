@@ -1,7 +1,6 @@
 package com.example.projectfitnessapp;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -76,9 +75,9 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     }
 
     private void changePassword(View view) {
-        String userIdField = etForgotPasswordUserId.toString().trim();
-        String newPassword = etForgotPasswordPassword.toString().trim();
-        String confirmPassword = etForgotPasswordConfirm.toString().trim();
+        String userIdField = etForgotPasswordUserId.getText().toString().trim();
+        String newPassword = etForgotPasswordPassword.getText().toString().trim();
+        String confirmPassword = etForgotPasswordConfirm.getText().toString().trim();
         if (userIdField.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()){
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -127,7 +126,6 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
-
     private void findUserId(View view) {
         try {
             String userId = etForgotPasswordUserId.getText().toString().trim();
