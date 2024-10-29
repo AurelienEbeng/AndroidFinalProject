@@ -75,9 +75,12 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
     }
 
     private void changePassword(View view) {
+        //Gets User data from EditText
         String userIdField = etForgotPasswordUserId.getText().toString().trim();
         String newPassword = etForgotPasswordPassword.getText().toString().trim();
         String confirmPassword = etForgotPasswordConfirm.getText().toString().trim();
+
+        // Creates a message if condition is met which could lead to a Database error
         if (userIdField.isEmpty() || newPassword.isEmpty() || confirmPassword.isEmpty()){
             Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
             return;
@@ -89,6 +92,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
 
         int userId;
 
+        // Attempts to convert userId into int
         try {
             userId = Integer.parseInt(userIdField);
         } catch (NumberFormatException e) {
@@ -126,8 +130,10 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
+
     private void findUserId(View view) {
         try {
+            // Gets UserId
             String userId = etForgotPasswordUserId.getText().toString().trim();
 
             if (userId.isEmpty()) {
@@ -135,12 +141,15 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                 return;
             }
 
+            // Check if userId exist in firebase
             userDatabase.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
                         Snackbar.make(view, "Input ur new Password", Snackbar.LENGTH_LONG).show();
 
+                        // Change visibility of EditText, TextView, Button in order to change
+                        // password
                         tvForgotPasswordConfirm.setVisibility(View.VISIBLE);
                         tvForgotPasswordPassword.setVisibility(View.VISIBLE);
                         etForgotPasswordPassword.setVisibility(View.VISIBLE);
@@ -151,6 +160,7 @@ public class ForgotPassword extends AppCompatActivity implements View.OnClickLis
                     }
                 }
 
+                // Gives a message if there's a database error
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
                     Snackbar.make(view, "Error : " + error.getMessage(),Snackbar.LENGTH_LONG).show();

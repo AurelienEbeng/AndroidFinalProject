@@ -87,6 +87,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
     }
 
     private void createAccount() {
+        // Gets all the input needed from EditText
         String password = etPassword.getText().toString().trim();
         int userId = Integer.parseInt(tvCreateAccountUserIdData.getText().toString().trim());
         int personId = userId;
@@ -99,12 +100,15 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         Person person = new Person(personId, name, age, weight, height, BMI);
         User user = new User(userId, password);
 
+        // Creates User in firebase
         userDatabase.child(String.valueOf(userId)).setValue(user).addOnCompleteListener(userTask -> {
             if (userTask.isSuccessful()) {
+                //Creates Person in firebase
                 personDatabase.child(String.valueOf(userId)).setValue(person).addOnCompleteListener(personTask -> {
                     if (personTask.isSuccessful()) {
                         Toast.makeText(this, "Account created successfully", Toast.LENGTH_SHORT).show();
 
+                        // Goes to LoginActivity page if person and user is created
                         Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
                         startActivity(intent);
                         finish();
@@ -120,25 +124,25 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
 
     private void displayId(){
          userDatabase = FirebaseDatabase.getInstance().getReference("User"); //
-        // Reference to your database
 
-        // Assuming you want to get the last user ID
+        // Gets last userId
         userDatabase.orderByKey().limitToLast(1).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
-                        // Assuming the key is the user ID
+
                         int userId = Integer.parseInt(userSnapshot.getKey()) + 100;
                         // Update the TextView with the retrieved user ID
-                        tvCreateAccountUserIdData.setText(String.valueOf(userId)); // Set user ID to
-                        // TextView
+                        tvCreateAccountUserIdData.setText(String.valueOf(userId));
+
                     }
                 } else {
-                    tvCreateAccountUserIdData.setText("No users found."); // Handle case if no users exist
+                    tvCreateAccountUserIdData.setText("No users found.");
                 }
             }
 
+            // Method in order to handle non existence Database.
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle possible errors

@@ -18,10 +18,10 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/tvEditUserUsername"
+        android:id="@+id/tvEditUserUserIdLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Username : "
+        android:text="User Id : "
         style="@style/Text_Style"
         android:layout_marginTop="50dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:text="Password : "
         style="@style/Text_Style"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvEditUserUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/tvEditUserUserIdLabel" />
 
     <TextView
         android:id="@+id/tvEditUserPasswordConfirmation"
@@ -45,22 +45,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvEditUserPassword"/>
 
-    <EditText
-        android:id="@+id/etEditUserUsername"
+    <TextView
+        android:id="@+id/tvEditUserUserId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Username"
-        style="@style/EditText_Style"
+        android:text="UserId"
+        style="@style/Text_Style"
         android:inputType="text"
-        app:layout_constraintStart_toEndOf="@+id/tvEditUserUsername"
-        app:layout_constraintTop_toTopOf="@+id/tvEditUserUsername"/>
+        android:layout_marginTop="0dp"
+        app:layout_constraintStart_toEndOf="@+id/tvEditUserUserIdLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvEditUserUserIdLabel"/>
 
     <EditText
         android:id="@+id/etUserPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:inputType="text"
+        android:inputType="textPassword"
         style="@style/EditText_Style"
         app:layout_constraintStart_toEndOf="@+id/tvEditUserPassword"
         app:layout_constraintTop_toTopOf="@+id/tvEditUserPassword" />
@@ -70,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Password"
+        android:inputType="textPassword"
         style="@style/EditText_Style"
         app:layout_constraintStart_toEndOf="@+id/tvEditUserPasswordConfirmation"
         app:layout_constraintTop_toTopOf="@+id/tvEditUserPasswordConfirmation"/>
@@ -86,12 +88,12 @@
 
     <Button
         android:id="@+id/btnEditUserBack"
+        style="@style/Button_Style"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
         android:text="Back"
-        style="@style/Button_Style"
-        android:layout_marginBottom="10dp"
-        android:layout_marginEnd="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

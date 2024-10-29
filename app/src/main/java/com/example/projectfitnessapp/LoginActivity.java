@@ -83,28 +83,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void login(View view) {
         try {
+            // Get data for User
             int userId = Integer.parseInt(etUserId.getText().toString());
             String password = etPassword.getText().toString();
 
-
-
-
+            // Referencing the User base on the UserId to check if it exist.
             DatabaseReference userRef = UserDatabase.child(String.valueOf(userId));
             userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     if (snapshot.exists()) {
+                        //Gets Password input
                         String storedPassword = snapshot.child("password").getValue(String.class);
 
+                        //Verify if password is valid
                         if (storedPassword != null && storedPassword.equals(password)) {
                             User user = new User(userId, password);
 
+                            // Keeps userId session throughout the Application
                             SharedPreferences sharedPreferences = getSharedPreferences(
                                     "MyAppPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putInt("userId", userId);
-                            editor.apply();
+                            editor.putInt("userId", userId); // Save userId
+                            editor.apply(); // Apply changes
 
+                            // Goes to mainMenu activity when login is successful
                             Intent intent = new Intent(LoginActivity.this, MainMenu.class);
                             startActivity(intent);
                             finish();
