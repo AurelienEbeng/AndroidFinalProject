@@ -104,6 +104,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:background="@null"
+        android:inputType="textPassword"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/tvPassword"
         app:layout_constraintTop_toTopOf="@+id/tvPassword"/>

@@ -131,6 +131,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:background="@null"
+        android:inputType="textPassword"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/tvPassword"
         app:layout_constraintTop_toTopOf="@+id/tvPassword"/>
@@ -144,6 +145,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:background="@null"
+        android:inputType="textPassword"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/tvConfirmPassword"
         app:layout_constraintTop_toTopOf="@+id/tvConfirmPassword"/>
@@ -170,6 +172,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:background="@null"
+        android:inputType="number"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/tvAge"
         app:layout_constraintTop_toTopOf="@+id/tvAge"/>
@@ -183,6 +186,7 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         android:background="@null"
+        android:inputType="numberDecimal"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@+id/tvHeight"
         app:layout_constraintTop_toTopOf="@+id/tvHeight"/>
@@ -197,6 +201,7 @@
         android:textColor="@color/black"
         android:background="@null"
         android:layout_marginStart="10dp"
+        android:inputType="numberDecimal"
         app:layout_constraintStart_toEndOf="@+id/tvWeight"
         app:layout_constraintTop_toTopOf="@+id/tvWeight"/>
 
