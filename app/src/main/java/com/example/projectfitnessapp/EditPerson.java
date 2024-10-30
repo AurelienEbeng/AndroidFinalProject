@@ -1,5 +1,6 @@
 package com.example.projectfitnessapp;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -27,10 +28,9 @@ public class EditPerson extends AppCompatActivity implements View
         .OnClickListener, ValueEventListener {
     DatabaseReference personDatabase;
 
-    SharedPreferences sharedPreferences;
     EditText etEditPersonName,etEditPersonAge,etEditPersonWeight,etEditPersonHeight;
     Button btnEditPersonSave, btnEditPersonReturn;
-    private int userId;
+    private int personId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +48,7 @@ public class EditPerson extends AppCompatActivity implements View
 
     private void initialize() {
         personDatabase = FirebaseDatabase.getInstance().getReference("Person");
-
-        sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        userId = sharedPreferences.getInt("userId",-1);
+        personId = getIntent().getIntExtra("personId", -1);
         etEditPersonAge = findViewById(R.id.etEditPersonAge);
         etEditPersonHeight = findViewById(R.id.etEditPersonHeight);
         etEditPersonName = findViewById(R.id.etEditPersonName);
@@ -61,7 +59,7 @@ public class EditPerson extends AppCompatActivity implements View
         btnEditPersonSave.setOnClickListener(this);
         btnEditPersonReturn.setOnClickListener(this);
 
-        getPersonFromDatabase(userId);
+        getPersonFromDatabase(personId);
     }
 
     @Override
@@ -80,15 +78,18 @@ public class EditPerson extends AppCompatActivity implements View
             String weight = etEditPersonWeight.getText().toString();
             String height = etEditPersonHeight.getText().toString();
 
-            Person person = new Person(userId,name,Integer.parseInt(age),Float.parseFloat(weight),Float.parseFloat(height));
-            personDatabase.child(String.valueOf(userId)).setValue(person);
-            Toast.makeText(this, "The person with id "+userId+"has been updated", Toast.LENGTH_SHORT).show();
+            Person person = new Person(personId,name,Integer.parseInt(age),Float.parseFloat(weight),Float.parseFloat(height));
+            personDatabase.child(String.valueOf(personId)).setValue(person);
+            Toast.makeText(this, "The person with id "+ personId +"has been updated", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void goToDisplayPersonActivity() {
+        Intent intent = new Intent(EditPerson.this, DisplayPerson.class);
+        intent.putExtra("personId",personId);
+        startActivity(intent);
         finish();
     }
 
@@ -106,7 +107,7 @@ public class EditPerson extends AppCompatActivity implements View
             etEditPersonAge.setText(age);
             etEditPersonWeight.setText(weight);
             etEditPersonHeight.setText(height);
-            Toast.makeText(this, userId, Toast.LENGTH_SHORT).show();
+
         }
         else{
             Toast.makeText(this, "No document", Toast.LENGTH_SHORT).show();

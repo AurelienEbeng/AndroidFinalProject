@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                             // Goes to mainMenu activity when login is successful
                             Intent intent = new Intent(LoginActivity.this, MainMenu.class);
+                            intent.putExtra("personId",userId);
                             startActivity(intent);
                             finish();
                         } else {

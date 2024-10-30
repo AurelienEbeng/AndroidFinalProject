@@ -31,6 +31,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     DatabaseReference personDatabase;
 
     SharedPreferences sharedPreferences;
+    private int personId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         // Keep the user Id throughout the app
         sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         userId = sharedPreferences.getInt("userId",-1);
+        personId = getIntent().getIntExtra("personId",-1);
     }
 
     @Override
@@ -81,6 +83,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
     private void goToProfile(View view) {
         Intent intent = new Intent(MainMenu.this, DisplayPerson.class);
+        intent.putExtra("personId",personId);
         startActivity(intent);
         finish();
     }

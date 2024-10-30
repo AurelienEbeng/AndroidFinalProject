@@ -34,6 +34,7 @@ public class DisplayPerson extends AppCompatActivity implements View.OnClickList
     DatabaseReference personDatabase;
 
     SharedPreferences sharedPreferences;
+    private int personId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class DisplayPerson extends AppCompatActivity implements View.OnClickList
 
         sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         userId = sharedPreferences.getInt("userId",-1);
+        personId = getIntent().getIntExtra("personId", -1);
 
 //        displayPersonInfo();
     }
@@ -123,6 +125,7 @@ public class DisplayPerson extends AppCompatActivity implements View.OnClickList
 
     private void goToEditPersonActivity() {
         Intent intent = new Intent(DisplayPerson.this, EditPerson.class);
+        intent.putExtra("personId",personId);
         startActivity(intent);
         finish();
     }
