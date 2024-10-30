@@ -10,18 +10,16 @@ public class Person {
     public int age;
     public float weight;
     public float height;
-    public int bmi;
+
     //public ArrayList<>
 
-    public Person(int personId, String name, int age, float weight, float height,
-                  int bmi){
+    public Person(int personId, String name, int age, float weight, float height){
         this.personId = personId;
         this.userId = personId;
         this.name = name;
         this.age = age;
         this.weight = weight;
         this.height = height;
-        this.bmi = bmi;
     }
 
     public Person(){
@@ -33,18 +31,10 @@ public class Person {
         return " Name = '" + name + '\'' +
                 ", Age = " + age +
                 ", Weight = " + weight +
-                ", Height = " + height +
-                ", BMI = " + bmi +
+                ", Height = " + height+
                 '}';
     }
 
-    public int getBmi() {
-        return bmi;
-    }
-
-    public void setBmi(int bmi) {
-        this.bmi = bmi;
-    }
 
     public float getHeight() {
         return height;

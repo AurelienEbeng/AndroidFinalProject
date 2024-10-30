@@ -97,7 +97,7 @@ public class CreateAccountActivity extends AppCompatActivity implements View.OnC
         float height = Float.parseFloat(etHeight.getText().toString().trim());
         int BMI = 0;
 
-        Person person = new Person(personId, name, age, weight, height, BMI);
+        Person person = new Person(personId, name, age, weight, height);
         User user = new User(userId, password);
 
         // Creates User in firebase
