@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import model.Person;
 
-public class DisplayPerson extends AppCompatActivity implements View.OnClickListener{
+public class DisplayPerson extends AppCompatActivity implements View.OnClickListener, ValueEventListener{
 
     private int userId;
 
@@ -67,6 +67,7 @@ public class DisplayPerson extends AppCompatActivity implements View.OnClickList
         sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         userId = sharedPreferences.getInt("userId",-1);
         personId = getIntent().getIntExtra("personId", -1);
+        getPersonFromDatabase(personId);
 
 //        displayPersonInfo();
     }
@@ -113,6 +114,7 @@ public class DisplayPerson extends AppCompatActivity implements View.OnClickList
 
     private void goToMainMenuActivity() {
         Intent intent = new Intent(DisplayPerson.this, MainMenu.class);
+        intent.putExtra("personId",personId);
         startActivity(intent);
         finish();
     }
@@ -128,5 +130,32 @@ public class DisplayPerson extends AppCompatActivity implements View.OnClickList
         intent.putExtra("personId",personId);
         startActivity(intent);
         finish();
+    }
+
+    private void getPersonFromDatabase(int userId){
+        personDatabase.child(String.valueOf(userId)).addValueEventListener(this);
+    }
+
+    @Override
+    public void onDataChange(@NonNull DataSnapshot snapshot) {
+        if(snapshot.exists()){
+            String name = snapshot.child("name").getValue().toString();
+            String age = snapshot.child("age").getValue().toString();
+            String weight = snapshot.child("weight").getValue().toString();
+            String height = snapshot.child("height").getValue().toString();
+            tvDisplayPersonNameData.setText(name);
+            tvDisplayPersonAgeData.setText(age);
+            tvDisplayPersonWeightData.setText(weight);
+            tvDisplayPersonHeightData.setText(height);
+
+        }
+        else{
+            Toast.makeText(this, "No document", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError error) {
+
     }
 }
